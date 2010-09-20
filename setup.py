@@ -16,7 +16,6 @@ setup(
     version = "0.6.1",
     maintainer = "Ted Tibbetts",
     maintainer_email = "intuited@gmail.com",
-    author = "Tomer Filiba",
     url = "http://github.com/intuited/terminable_thread",
     description = format_desc("""
         Provides a subclass of Thread with facilities to
