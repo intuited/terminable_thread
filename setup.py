@@ -13,7 +13,7 @@ def format_classifiers(classifiers):
 
 setup(
     name = "terminable_thread",
-    version = "0.6",
+    version = "0.6.1",
     maintainer = "Ted Tibbetts",
     maintainer_email = "intuited@gmail.com",
     author = "Tomer Filiba",
@@ -34,7 +34,7 @@ setup(
         Topic :: Utilities
         """),
     keywords = 'threading'.split(' '),
-    packages = ['terminable_thread'],
+    packages = ['terminable_thread', 'terminable_thread.test'],
     package_dir = {'terminable_thread': ''},
     test_suite = 'terminable_thread.test.suite',
     )
