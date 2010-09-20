@@ -13,7 +13,7 @@ def format_classifiers(classifiers):
 
 setup(
     name = "terminable_thread",
-    version = "0.6.1",
+    version = "0.6.2",
     maintainer = "Ted Tibbetts",
     maintainer_email = "intuited@gmail.com",
     url = "http://github.com/intuited/terminable_thread",
