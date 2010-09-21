@@ -104,7 +104,7 @@ I'm not entirely sure what that means legally, since
 - the definition of "public domain", when used formally,
   is dependent on the laws of a particular region.
 
-So it's a bit complicated,
+So it's a bit complicated and vague,
 but he did say that I could do whatever I wanted with it,
 so I've chosen to prevent such ambiguities in the future
 by licensing this derivation under the `WTFPL`_.
