@@ -11,6 +11,10 @@ def format_desc(desc):
 def format_trove(trove):
     return dedent(trove).strip().split('\n')
 
+def file_contents(filename):
+    with open(filename) as f:
+        return f.read()
+
 setup(
     name = "terminable_thread",
     version = "0.7",
@@ -22,6 +26,7 @@ setup(
         raise an exception in the thread
         or terminate the thread from another thread.
         """),
+    long_description = file_contents('README.rst'),
     classifiers = format_trove("""
         Development Status :: 3 - Alpha
         Intended Audience :: Developers
