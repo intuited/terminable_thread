@@ -13,10 +13,9 @@ def format_classifiers(classifiers):
 
 setup(
     name = "terminable_thread",
-    version = "0.6.1",
+    version = "0.6.4",
     maintainer = "Ted Tibbetts",
     maintainer_email = "intuited@gmail.com",
-    author = "Tomer Filiba",
     url = "http://github.com/intuited/terminable_thread",
     description = format_desc("""
         Provides a subclass of Thread with facilities to
@@ -26,14 +25,14 @@ setup(
     classifiers = format_classifiers("""
         Development Status :: 3 - Alpha
         Intended Audience :: Developers
-        License :: OSI Approved :: BSD License
+        License :: OSI Approved :: GNU General Public License (GPL)
         Operating System :: OS Independent
         Programming Language :: Python
         Programming Language :: Python :: 2
         Topic :: Software Development :: Libraries :: Python Modules
         Topic :: Utilities
         """),
-    keywords = 'threading'.split(' '),
+    keywords = 'threading multithreading'.split(' '),
     packages = ['terminable_thread', 'terminable_thread.test'],
     package_dir = {'terminable_thread': ''},
     test_suite = 'terminable_thread.test.suite',
