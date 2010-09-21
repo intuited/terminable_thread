@@ -109,12 +109,14 @@ but he did say that I could do whatever I wanted with it,
 so I've chosen to prevent such ambiguities in the future
 by licensing this derivation under the `WTFPL`_.
 
+The license terms are given in the file ``COPYING``.
+
 .. _his site: `the recipe page`_
 .. _WTFPL: http://sam.zoy.org/wtfpl/
 
 
-Warranty
---------
+(Lack of) Warranty
+------------------
 
 As mentioned at the top,
 I myself am not entirely convinced of the reliability of this code.
