@@ -1,14 +1,10 @@
 """Code based on [http://sebulba.wikispaces.com/recipe+thread2].
 
-As noted therein:
+`terminable_thread` provides a subclass of `threading.Thread`,
+  adding the facility to raise exceptions in the context of the given thread.
 
-The exception will be raised only when executing python bytecode.
-If your thread calls a native/built-in blocking function,
-  the exception will be raised only when execution returns to the python code.
-
-There is also an issue if the built-in function internally calls PyErr_Clear(),
-  which would effectively cancel your pending exception.
-You can try to raise it again.
+See the `README` for information on problematic issues, licensing,
+  and other shenanigans.
 
     >>> import time
     >>>
@@ -29,6 +25,13 @@ You can try to raise it again.
     >>> t.isAlive()
     False
 """
+# This program is free software.
+# It comes without any warranty, to the extent permitted by applicable law.
+# You can redistribute it and/or modify it
+#   under the terms of the Do What The Fuck You Want To Public License, Version 2,
+#   as published by Sam Hocevar.
+# See http://sam.zoy.org/wtfpl/COPYING for more details.
+
 import threading
 import inspect
 import ctypes

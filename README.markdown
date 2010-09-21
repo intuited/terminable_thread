@@ -1,12 +1,35 @@
 `terminable_thread`
 ===================
 
-The code in this module is taken, with a patch,
+`terminable_thread` provides a subclass of `threading.Thread`,
+  adding the facility to raise exceptions in the context of the given thread.
+
+This facility is incorporated in the methods `raise_exc`,
+  which raises an arbitrary exception,
+  and `terminate`, which raises SystemExit.
+
+This is not done in an entirely robust manner,
+  and there may be unreported issues with it.
+
+It uses the unexposed PyThreadState_SetAsyncExc function (using ctypes) to raise an exception for the given thread.
+
+
+History
+-------
+
+The code used in this module is taken most directly
   from Tomer Filiba's [thread2 recipe].
-  
-It provides a subclass of Thread with facilities
-  to raise an exception in the thread
-  or terminate the thread from another thread.
+
+Similar code has been floating around the net in various incarnations;
+  however, Tomer's code seems to be the most complete.
+
+His page references a [post by Antoon Pardon],
+  previously available at
+  [http://mail.python.org/pipermail/python-list/2005-December/316143.html](3),
+  as an inspiration.
+
+Tomer has indicated that his code is available in the public domain.
+
 
 Issues
 ------
@@ -37,8 +60,9 @@ These issues are mentioned on [the recipe page][thread2 recipe]:
 In addition to these issues, or rather as an elaboration of the first one,
   I've noticed that catching of exceptions does not function as expected.
 
-Specifically, if the thread wraps a blocking function with a try/except clause,
+Specifically, if the thread wraps some functions with a try/except clause,
   the except may not catch an interrupt exception.
+This will happen, for instance, with a `time.sleep` call.
 
 For an example of this, see the method `FetcherTester.test_incorrect_fission`
   in the test suite for the [pqueue_fetcher] module.
@@ -49,43 +73,58 @@ I guess I'll port that test into this module at some point.
 Distribution
 ------------
 
-`terminable_thread` is available from the [github repo].
+`terminable_thread` is available from the [github repo]
+  or from its [PyPI page].
 
-An `easy_install` -able package can be downloaded from
-  [http://github.com/intuited/terminable_thread/raw/dist/dist/terminable_thread-0.6.4.tar.gz][1],
-  or for a more recent version, a different file with a similar name.
 
 License
 -------
 
-I'm not really sure what to do about this.
+As mentioned above, Tomer has indicated that
+  the code on [his site][thread2 recipe] is public domain.
 
-Code similar to Tomer's has been floating around the Internet for a while,
-  however his code seems to be the most complete that I've discovered.
+I'm not entirely sure what that means legally, since
 
-His page itself references a [post by Antoon Pardon],
-  previously available at
-  (http://mail.python.org/pipermail/python-list/2005-December/316143.html),
-  as an inspiration.
+-   the term "public domain" is often used informally,
+      to just mean that no license has been applied.
+-   the definition of "public domain", when used formally,
+      is dependent on the laws of a particular region.
+-   Tomer is from Israel,
+      and I have pretty much zero understanding of Israel's legal system.
 
-Tomer's wikispaces doesn't seem to mention anything about licensing;
-  as I understand it, wikispaces pages are by default licensed under a
-  [Creative Commons Attribution-ShareAlike] license.
+So it's a bit complicated,
+  but he did say that I could do whatever I wanted with it,
+  so I've chosen to avoid such ambiguities in the future
+  by licensing this derivation of it under the [WTFPL].
 
-Since that license is not necessarily suitable to source code,
-  I'm tentatively placing this module under the [GPL],
-  which is similar in that it requires both attribution
-  and propagation of the license.
-See the file `COPYING` for the full license.
 
-I've written to Tomer to ask him to let me know
-  if he has objections to this module's distribution.
+Warranty
+--------
+
+As mentioned at the top,
+  I myself am not entirely convinced of the reliability of this code.
+
+I might get around to writing a more thorough test suite at some point.
+
+Please bear that, as well as the following Official Disclaimer,
+  in mind when (considering) using it:
+
+This program is free software.
+It comes without any warranty, to the extent permitted by applicable law.
+You can redistribute it and/or modify it
+  under the terms of the Do What The Fuck You Want To Public License, Version 2,
+  as published by Sam Hocevar.
+See [http://sam.zoy.org/wtfpl/COPYING](4) for more details.
+
 
 [thread2 recipe]: http://sebulba.wikispaces.com/recipe+thread2
 [github repo]: http://github.com/intuited/terminable_thread
+[PyPI page]: http://pypi.python.org/pypi/terminable_thread
 [post by Antoon Pardon]: http://mail.python.org/pipermail/python-list/2005-December/316143.html
 [Creative Commons Attribution-ShareAlike]: http://creativecommons.org/licenses/by-sa/3.0/
 [pqueue_fetcher]: http://github.com/intuited/pqueue_fetcher
+[WTFPL]: http://sam.zoy.org/wtfpl/
 [1]: http://github.com/intuited/terminable_thread/raw/dist/dist/terminable_thread-0.6.4.tar.gz
 [2]: http://mail.python.org/pipermail/python-dev/2006-August/068158.html
-[GPL]: http://www.gnu.org/licenses/gpl.html
+[3]: http://mail.python.org/pipermail/python-list/2005-December/316143.html
+[4]: http://sam.zoy.org/wtfpl/COPYING
