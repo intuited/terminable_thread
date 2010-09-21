@@ -17,7 +17,7 @@ def file_contents(filename):
 
 setup(
     name = "terminable_thread",
-    version = "0.7",
+    version = "0.7.1",
     maintainer = "Ted Tibbetts",
     maintainer_email = "intuited@gmail.com",
     url = "http://github.com/intuited/terminable_thread",

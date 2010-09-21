@@ -16,6 +16,12 @@ It uses the unexposed ``PyThreadState_SetAsyncExc`` function (via ``ctypes``)
 to raise an exception for the given thread.
 
 
+Usage
+-----
+
+Check the module doctest for a simple usage example.
+
+
 History
 -------
 
@@ -40,28 +46,28 @@ Issues
 
 The following issues are mentioned on `the recipe page`_:
 
-- The exception will be raised only when executing python bytecode.
-  If your thread calls a native/built-in blocking function,
-  the exception will be raised only when execution returns to the python code.
-  
-  - There is also an issue 
-    if the built-in function internally calls PyErr\_Clear(),
-    which would effectively cancel your pending exception.
-    You can try to raise it again.
+  - The exception will be raised only when executing python bytecode.
+    If your thread calls a native/built-in blocking function,
+    the exception will be raised only when execution returns to the python code.
+    
+    - There is also an issue 
+      if the built-in function internally calls PyErr\_Clear(),
+      which would effectively cancel your pending exception.
+      You can try to raise it again.
 
-- Only exception **types** can be raised safely.
-  Exception instances are likely to cause unexpected behavior,
-  and are thus restricted.
-  
-  - For example:
-    t1.raise\_exc(TypeError) and not t1.raise\_exc(TypeError("blah")).
-  - IMHO it's a bug, and I reported it as one. For more info,
-    `<http://mail.python.org/pipermail/python-dev/2006-August/068158.html>`_
+  - Only exception **types** can be raised safely.
+    Exception instances are likely to cause unexpected behavior,
+    and are thus restricted.
+    
+    - For example:
+      t1.raise\_exc(TypeError) and not t1.raise\_exc(TypeError("blah")).
+    - IMHO it's a bug, and I reported it as one. For more info,
+      `<http://mail.python.org/pipermail/python-dev/2006-August/068158.html>`_
 
-- I asked to expose this function in the built-in thread module,
-  but since ctypes has become a standard library (as of 2.5),
-  and this feature is not likely to be implementation-agnostic,
-  it may be kept unexposed.
+  - I asked to expose this function in the built-in thread module,
+    but since ctypes has become a standard library (as of 2.5),
+    and this feature is not likely to be implementation-agnostic,
+    it may be kept unexposed.
 
 In addition to these issues,
 or rather as an elaboration of the first one,
@@ -69,7 +75,7 @@ I've noticed that catching of exceptions does not function as expected.
 
 Specifically:
 
-  If the thread wraps some functions with a try/except clause,
+- If the thread wraps some functions with a try/except clause,
   the except may not catch an interrupt exception.
   This will happen, for instance, with a ``time.sleep`` call.
 
@@ -126,9 +132,11 @@ I might get around to writing a more thorough test suite at some point.
 Please bear that, as well as the following Official Disclaimer,
 in mind when (considering) using it:
 
+::
+
   This program is free software.
   It comes without any warranty, to the extent permitted by applicable law.
   You can redistribute it and/or modify it under the terms of the
   Do What The Fuck You Want To Public License, Version 2,
   as published by Sam Hocevar.
-  See `<http://sam.zoy.org/wtfpl/COPYING>`_ for more details.
+  See http://sam.zoy.org/wtfpl/COPYING for more details.
